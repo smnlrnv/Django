@@ -1,0 +1,50 @@
+{% load static %}
+{% load django_bootstrap5 %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'main/custom.css' %}">
+    <title>Document</title>
+</head>
+
+<body>
+    {% if user.is_authenticated %}
+    <form method="post" action="{% url 'logoutUser' %}">
+        {% csrf_token %}
+        <div class="d-flex mt-3 justify-content-center" style="font-size: 20px;">
+            <a href="{% url 'home' %}" class="me-3">Главная страница</a>
+            <a href="{% url 'blog' %}" class="me-3">Блог</a>
+            <a href="{% url 'account' %}" class="me-4">Аккаунт</a>
+            <button type="submit" class="btn btn-danger">Выход</button>
+        </div>
+    </form>    
+        </div>
+        {% else %}
+        <div class="d-flex mt-2 justify-content-center" style="font-size: 20px;">
+            <a href="{% url 'home' %}" class="me-3">Главная страница</a>
+            <a href="{% url 'blog' %}" class="me-2">Блог</a>
+            <a href="{% url 'admin:index' %}" class="me-2">Админка</a>
+            <a href="{% url 'loginUser' %}" class="me-2">Вход</a>
+            <a href="{% url 'register' %}" class="me-2">Регистрация</a>
+        </div>
+        <div class="d-flex mt-2 justify-content-center" style="font-size: 20px;">
+          <h5>Админка. Логин:admin Пароль:123</h5>
+      </div>
+       
+        {% endif %}
+
+</body>
+
+
+</html>
+
+
+{% block content %}{% endblock %}
